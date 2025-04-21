@@ -1,43 +1,70 @@
 #include <stdio.h>
+#include <string.h>
 
-// Desafio Super Trunfo - Países
-// Tema 2 - Comparação das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de comparação de cartas de cidades. 
-// Siga os comentários para implementar cada parte do desafio.
+struct CartaSuperTrunfo {
+    char estado[50];
+    int codigo;
+    char nomeCidade[50];
+    int populacao;
+    float area;
+    double pib;
+    int pontosTuristicos;
+};
+
+void mostrarCarta(struct CartaSuperTrunfo carta) {
+    printf("\n--- Carta Super Trunfo ---\n");
+    printf("Estado: %s\n", carta.estado);
+    printf("Código da Carta: %d\n", carta.codigo);
+    printf("Nome da Cidade: %s\n", carta.nomeCidade);
+    printf("População: %d\n", carta.populacao);
+    printf("Área: %.2f km²\n", carta.area);
+    printf("PIB: R$ %.2lf\n", carta.pib);
+    printf("Pontos Turísticos: %d\n", carta.pontosTuristicos);
+}
 
 int main() {
-    // Definição das variáveis para armazenar as propriedades das cidades
-    // Você pode utilizar o código do primeiro desafio
+    struct CartaSuperTrunfo rio = {
+        "RJ", 1, "Rio de Janeiro", 6748000, 1182.3, 407000000000.00, 25
+    };
 
-    
-    // Cadastro das Cartas:
-    // Implemente a lógica para solicitar ao usuário que insira os dados das cidades
-    // utilizando a função scanf para capturar as entradas.
-    // utilize o código do primeiro desafio
+    struct CartaSuperTrunfo sp = {
+        "SP", 2, "São Paulo", 12330000, 1521.1, 760000000000.00, 30
+    };
 
-    // Exemplo:
-    // printf("Digite o código da cidade: ");
-    // scanf("%s", codigo);
-    // 
-    // (Repita para cada propriedade)
+    printf("Carta 1:");
+    mostrarCarta(rio);
 
-    // Comparação de Cartas:
-    // Desenvolva a lógica de comparação entre duas cartas.
-    // Utilize estruturas de decisão como if, if-else para comparar atributos como população, área, PIB, etc.
+    printf("\nCarta 2:");
+    mostrarCarta(sp);
 
-    // Exemplo:
-    // if (populacaoA > populacaoB) {
-    //     printf("Cidade 1 tem maior população.\n");
-    // } else {
-    //     printf("Cidade 2 tem maior população.\n");
-    // }
+    int pontosRio = 0, pontosSP = 0;
 
-    // Exibição dos Resultados:
-    // Após realizar as comparações, exiba os resultados para o usuário.
-    // Certifique-se de que o sistema mostre claramente qual carta venceu e com base em qual atributo.
+    // Comparação: População
+    if (rio.populacao > sp.populacao) pontosRio++;
+    else if (sp.populacao > rio.populacao) pontosSP++;
 
-    // Exemplo:
-    // printf("A cidade vencedora é: %s\n", cidadeVencedora);
+    // Comparação: Área
+    if (rio.area > sp.area) pontosRio++;
+    else if (sp.area > rio.area) pontosSP++;
+
+    // Comparação: PIB
+    if (rio.pib > sp.pib) pontosRio++;
+    else if (sp.pib > rio.pib) pontosSP++;
+
+    // Comparação: Pontos turísticos
+    if (rio.pontosTuristicos > sp.pontosTuristicos) pontosRio++;
+    else if (sp.pontosTuristicos > rio.pontosTuristicos) pontosSP++;
+
+    printf("\nResultado da Comparação:\n");
+    printf("Pontos do Rio de Janeiro: %d\n", pontosRio);
+    printf("Pontos de São Paulo: %d\n", pontosSP);
+
+    if (pontosRio > pontosSP)
+        printf("Vencedor: Rio de Janeiro!\n");
+    else if (pontosSP > pontosRio)
+        printf("Vencedor: São Paulo!\n");
+    else
+        printf("Empate!\n");
 
     return 0;
 }
